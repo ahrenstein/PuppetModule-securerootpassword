@@ -1,0 +1,23 @@
+{
+  "author": "Matthew Ahrenstein",
+  "dependencies": [],
+  "license": "See LICENSE.txt",
+  "name": "ahrenstein-securerootpassword",
+  "operatingsystem_support": [
+  	{
+  		"operatingsystem":"Ubuntu",
+  		"operatingsystemrelease":[">=12.04"]
+  	}
+  ],
+  "project_page": "https://github.com/ahrenstein/PuppetModule-securerootpassword",
+  "requirements": [
+  	{
+      "name": "puppet",
+      "version_requirement": ">=3.7.0 <4.0.0"
+    }
+  ],
+  "source": "https://github.com/ahrenstein/PuppetModule-securerootpassword",
+  "summary": "Uses https://github.com/ahrenstein/SecurePassGenWeb functions to automate secure password control for root",
+  "tags": [],
+  "version": "0.1.0"
+}

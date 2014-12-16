@@ -1,0 +1,16 @@
+=== Puppet Secure Root Password Module ===
+This puppet module will generate secure root passwords based on a seed string and the FQDN of the machine for easy lookup later.
+=== Requirements ===
+*1) php5-cli to run PHP script for the custom Facter fact (Module will install this)
+*2) whois package for the mkpasswd command in order to hash the passwords properly (Module will install this)
+*3) Puppet version 3.4 or later (Test on 3.7.3 only)
+*4) Ubuntu 12.04 or later (Tested on 14.04 only)
+=== Installation Instructions ===
+*1) Check the git repo out to a module directory named "securerootpassword"
+*2) Add the module to your site.pp or hiera data
+*2a) Optionally you can override the password with the hiera variable securerootpassword:rootpassword encrypted as a shadow file compatible password
+=== How admins can lookup passwords ===
+The PHP script doing the work is using the core code based on https://github.com/ahrenstein/SecurePassGenWeb so as long as you know the seed, you can deploy that website and lookup your passwords.
+=== SECURITY WARNINGS ===
+*1) The seed string is stored in $MODULE_DIR/lib/facter/spg_pass.rb <br />You must change it from the default in order to protect your environment.
+*2) The seed is stored in a fact since puppet masters don't push the modules to their local machines. <br />It's highly unlikely that the raw fact's definition is stored on agent machines, but it is still possible.
