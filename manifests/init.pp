@@ -8,7 +8,8 @@
 
 class securerootpassword (
     #This allows us to override the password. If it's not UNDEF when we start, then it ignores the fact/secpass script and uses what we gave it.
-      $rootpassword = "UNDEF" #Must be generated via mkpasswd -m sha-512 -S SALT PASSWORD
+      $rootpassword = "UNDEF", #Must be generated via mkpasswd -m sha-512 -S SALT PASSWORD
+      $serverSeed = "DEFAULT SEED" #This is the default seed. This must be changed in Hiera or your environment is essentially secured with a default password
 ) {
 
   #We need PHP-CLI for executing the secpass script
@@ -44,15 +45,14 @@ class securerootpassword (
     require => File['Directory-autotools'], #Don't make the file without autotools directory existing
   }
 
-  #Add the seed.txt file only if it doesn't already exist
+  #Make sure 
   file { 'File-seedtxt':
     ensure  => file,
     path    => '/autotools/seed.txt',
-    replace => false, #This prevents the file from being updated once it exists
     owner   => 'root',
     group   => 'root',
     mode    => 600,
-    content => "secret seed goes here", #Example seed string
+    content => "$serverSeed", #Example seed string
     require => File['Directory-autotools'],
   }
 
