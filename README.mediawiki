@@ -13,4 +13,4 @@ This puppet module will generate secure root passwords based on a seed string an
 The PHP script doing the work is using the core code based on https://github.com/ahrenstein/SecurePassGenWeb so as long as you know the seed, you can deploy that website and lookup your passwords.
 === SECURITY WARNINGS ===
 *1) The seed string is stored in $MODULE_DIR/lib/facter/spg_pass.rb <br />You must change it from the default in order to protect your environment.
-*2) The seed is stored in a fact so anyone with root on one node, will get the sed and can obtain root on all of the nodes.
+*2) THE SEED IS STORED IN A FACT SO ANYONE WITH ROOT ON ONE NODE, WILL GET THE SED AND CAN OBTAIN ROOT ON ALL OF THE NODES!
