@@ -50,15 +50,15 @@ class securerootpassword (
     #This if block acts as a Try/Catch against secpass.php disappearing. This way the module
     #doesn't fail if puppet randomly decides to try setting the password and running the $spg_fact
     #before deploying the file
-    if spg_file_exists ("/autotools/secpass.php") == 1 {
+    if $spg_pass =~ /\:/ {
+      notice ('ERROR: secpass.php is not available so we aren\'t touching the root password until the next puppet run!')
+    }
+    else {
       user { 'User-root':
         name     => 'root',
         ensure   => present,
         password => $spg_pass,
       }
-    }
-    else {
-      notice ('ERROR: secpass.php is not available so we aren\'t touching the root password until the next puppet run!')
     }
   }
   #If $rootpassword is defined in Hiera then we will use that variable instead.
