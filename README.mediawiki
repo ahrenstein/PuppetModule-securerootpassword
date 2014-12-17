@@ -7,8 +7,13 @@ This puppet module will generate secure root passwords based on a seed string an
 *4) Ubuntu 12.04 or later (Tested on 14.04 only)
 === Installation Instructions ===
 *1) Check the git repo out to a module directory named "securerootpassword"
-*2) Add the module to your site.pp or hiera data
-*2a) Optionally you can override the password with the hiera variable securerootpassword:rootpassword encrypted as a shadow file compatible password
+*2) Add the module to your Hiera data
+*2a) Optionally you can override the password with the Hiera variable securerootpassword:rootpassword encrypted as a shadow file compatible password <br />Doing this ignores the seed string all together even if that is defined.
 === How admins can lookup passwords ===
 The PHP script doing the work is using the core code based on https://github.com/ahrenstein/SecurePassGenWeb so as long as you know the seed, you can deploy that website and lookup your passwords.
 === SECURITY WARNINGS ===
+*1) The seed string is modified with a Hiera variable but in order for the script to work it is stored in /autotools/seed.txt with root:root 600 permissions <br/>THIS MEANS ANYONE WITH ROOT ACCESS TO A MANAGED SYSTEM CAN GET THE SEED FOR EVERY OTHER SYSTEM IN THAT HIERA GROUPING
+*2) In theory if there is a way to grab the Hiera data assigned to your machine from the command line as a non-root user then someone could get the seed string and gain root on all nodes in that Hiera grouping.
+*3) If the seed string is not declared in Hiera, then a default string is used. This is essentially the same as a default password. CHANGE IT!
+=== Use cases ===
+Due to the current security issues above, this module is only useful in organizations where DevOps/Admin/etc team is the only group with root on systems. This is unfortunately due to limitations with puppet 3.7.3 (latest as of last commit) If the situation improves I will make the module more secure.
