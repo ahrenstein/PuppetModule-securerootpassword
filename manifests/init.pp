@@ -39,9 +39,21 @@ class securerootpassword (
     path    => '/autotools/secpass.php',
     owner   => 'root',
     group   => 'root',
-    mode    => 640,
+    mode    => 600,
     source  => 'puppet:///modules/securerootpassword/secpass.php',
     require => File['Directory-autotools'], #Don't make the file without autotools directory existing
+  }
+
+  #Add the seed.txt file only if it doesn't already exist
+  file { 'File-seedtxt':
+    ensure  => file,
+    path    => '/autotools/seed.txt',
+    replace => false, #This prevents the file from being updated once it exists
+    owner   => 'root',
+    group   => 'root',
+    mode    => 600,
+    content => "secret seed goes here", #Example seed string
+    require => File['Directory-autotools'],
   }
 
   #This if block checks if $rootpassword is overridden by Hiera. If not, it uses the custom fact

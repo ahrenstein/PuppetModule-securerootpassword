@@ -10,6 +10,6 @@
 #If this fact is run with the PHP script missing, the module will fail with an error
 Facter.add('spg_pass') do
       setcode do
-        Facter::Core::Execution.exec('/usr/bin/php /autotools/secpass.php `/usr/bin/facter fqdn` "secretseed"')
+        Facter::Core::Execution.exec('/usr/bin/php /autotools/secpass.php `/usr/bin/facter fqdn`')
       end
     end

@@ -71,11 +71,20 @@
       }
 
 $serverFQDN = $argv[1]; //Get the FQDN from command line
-$serverSeed = $argv[2]; //Get the seed from command line
 $ptextPass = ""; //Variable for plaintext passwordi
 $hashPass = ""; //Variable for the SHA-512 password for puppet to use
+
+//The below if/else makes sure the seed exists before trying. If it fails it outputs an error with a :
+//because the : will cause the securerootpasswrod puppet module regex to not attempt a password change
+if (file_exists("/autotools/seed.txt")) {
+	$serverSeed = exec("/bin/cat /autotools/seed.txt");
+}
+else {
+	echo "Error: Server seed file is missing!";
+	exit;
+}
 //The below if/else checks to make sure we have the correct amount of arguments
-if (count($argv) == 3)
+if (count($argv) == 2)
 {
 	$ptextPass = GenPass($serverFQDN, $serverSeed); //Generate the password from the CLI args
 	$hashCommand = "/usr/bin/mkpasswd -m sha-512 -S iTFgQCF0 " . escapeshellarg ($ptextPass); //This creates a hash command and escapes the password which could contain ' or "
@@ -85,7 +94,7 @@ if (count($argv) == 3)
 }
 else
 {
-	echo "Usage is: " . $argv[0] . " <server FQDN> <Secret Seed Phrase>";
+	echo "Usage is: " . $argv[0] . " <server FQDN>";
 		exit;
 }
 
