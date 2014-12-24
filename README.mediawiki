@@ -1,4 +1,4 @@
-=== Puppet Secure Root Password Module ===
+=== Puppet Module - Secure Root Password ===
 This puppet module will generate secure root passwords based on a seed string and the FQDN of the machine for easy lookup later.
 === Requirements ===
 *1) php5-cli to run PHP script for the custom Facter fact (Module will install this)
