@@ -3,7 +3,7 @@ This puppet module will generate secure root passwords based on a seed string an
 === Requirements ===
 *1) php5-cli to run PHP script for the custom Facter fact (Module will install this)
 *2) whois package for the mkpasswd command in order to hash the passwords properly (Module will install this)
-*3) Puppet version 3.4 or later (Test on 3.7.3 only)
+*3) Puppet version 3.7.3 or later (Test on 3.7.3 only)
 *4) Ubuntu 12.04 or later (Tested on 14.04 only)
 === Installation Instructions ===
 *1) Check the git repo out to a module directory named "securerootpassword"
