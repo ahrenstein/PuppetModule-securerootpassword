@@ -1,5 +1,5 @@
 === DEPRECATION WARNING ===
-I am no longer maintaining this puppet module as I have started working with Chef instead. I don't have a Chef version of this module at this time though, and I may never make one since this isn't the best way to manage access to servers.
+I am no longer maintaining this puppet module as I have started working with <strike>Chef</strike> Ansible instead. I don't have an <strike>Chef</strike> Ansible version of this module at this time though, and I may never make one since this isn't the best way to manage access to servers.
 <br />I will still accept pull requests against this module if improvements are made to it though.
 === Puppet Module - Secure Root Password ===
 This puppet module will generate secure root passwords based on a seed string and the FQDN of the machine for easy lookup later.
